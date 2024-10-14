@@ -44,7 +44,7 @@ Adw.Window {
           }
 
           [end]
-          Button {
+          ToggleButton {
             icon-name: "music-note-outline-symbolic";
             tooltip-text: _("Toggle Music");
           }
@@ -173,8 +173,8 @@ Adw.Window {
             [bottom]
             ActionBar {
               [end]
-              Button {
-                label: _("Next");
+              Button install_page_button {
+                label: _("Install");
 
                 styles [
                   "pill",
@@ -221,10 +221,113 @@ Adw.Window {
                   }
 
                   Label {
-                    label: "To continue, click Next. If you would like to select a different folder, click Browse";
+                    label: "To continue, click Next. If you would like to select a different drive, click Browse";
                     halign: start;
                     wrap: true;
                     margin-top: 20;
+                  }
+
+                  ListBox {
+                    selection-mode: none;
+                    margin-top: 12;
+
+                    styles [
+                      "boxed-list"
+                    ]
+
+                    Adw.ActionRow {
+                      title: _("Drive");
+                      subtitle: "UWU 2000 1TB";
+
+                      [suffix]
+                      Button {
+                        icon-name: "folder-open-symbolic";
+                        tooltip-text: _("Browse");
+                        valign: center;
+                        has-frame: false;
+                      }
+                    }
+                  }
+                }
+              }
+            };
+          }
+        }
+
+        Adw.NavigationPage page3 {
+          title: _("Installation - Setup");
+
+          Adw.ToolbarView {
+            [top]
+            Adw.HeaderBar {
+              show-back-button: false;
+            }
+
+            [bottom]
+            ActionBar {
+              [end]
+              Button {
+                label: _("Finish");
+
+                styles [
+                  "pill",
+                  "suggested-action"
+                ]
+              }
+            }
+
+            content: ScrolledWindow {
+              Adw.Clamp {
+                valign: start;
+                margin-start: 12;
+                margin-end: 12;
+
+                Box {
+                  orientation: vertical;
+                  halign: start;
+
+                  Label {
+                    label: "Installing Linux...";
+                    halign: start;
+                    wrap: true;
+
+                    styles [
+                      "title-1"
+                    ]
+                  }
+
+                  Label {
+                    label: "This will take a while...";
+                    halign: start;
+                    wrap: true;
+                  }
+
+                  Box {
+                    homogeneous: true;
+                    vexpand: true;
+                    margin-top: 80;
+                  }
+
+                  Box {
+                    orientation: vertical;
+                    valign: end;
+
+                    Label {
+                      label: "Progress: 100%";
+                      halign: start;
+                      margin-bottom: 10;
+                    }
+
+                    ProgressBar {
+                      width-request: 400;
+                      halign: start;
+                      hexpand: true;
+                      fraction: 1;
+
+                      styles [
+                        "progress-bar"
+                      ]
+                    }
                   }
                 }
               }
