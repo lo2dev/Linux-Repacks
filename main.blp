@@ -1,0 +1,237 @@
+using Gtk 4.0;
+using Adw 1;
+
+Adw.Window {
+  width-request: 360;
+  height-request: 200;
+  default-width: 940;
+  default-height: 480;
+
+  Adw.Breakpoint {
+    condition ("max-width: 400sp")
+
+    setters {
+      split_view.collapsed: true;
+    }
+  }
+
+  content: Adw.NavigationSplitView split_view {
+    min-sidebar-width: 270;
+
+    sidebar: Adw.NavigationPage {
+      title: _("Sidebar");
+      tag: "sidebar";
+
+      child: Adw.ToolbarView {
+        styles [
+          "custom-sidebar"
+        ]
+
+        [top]
+        Adw.HeaderBar {
+          show-title: false;
+        }
+
+        [bottom]
+        ActionBar {
+          [start]
+          Button {
+            child: Adw.ButtonContent {
+              icon-name: "globe-alt2-symbolic";
+              label: _("Official Website");
+              // tooltip-text: _("Official Linux Repacks Website");
+            };
+          }
+
+          [end]
+          Button {
+            icon-name: "music-note-outline-symbolic";
+            tooltip-text: _("Toggle Music");
+          }
+        }
+
+        content: Box {
+          orientation: vertical;
+
+          Label {
+            label: "Linux Repacks";
+
+            styles [
+              "title-1"
+            ]
+          }
+        };
+      };
+    };
+
+    content: Adw.NavigationPage {
+      title: _("Setup");
+      tag: "content";
+
+      child: Adw.NavigationView nav_view {
+        Adw.NavigationPage page1 {
+          title: _("Welcome - Setup");
+
+          Adw.ToolbarView {
+            [top]
+            Adw.HeaderBar {}
+
+            [bottom]
+            ActionBar {
+              [end]
+              Button page1_next_button {
+                label: _("Next");
+
+                styles [
+                  "pill",
+                  "suggested-action"
+                ]
+              }
+            }
+
+            content: ScrolledWindow {
+              Adw.Clamp {
+                valign: start;
+                margin-start: 12;
+                margin-end: 12;
+
+                Box {
+                  orientation: vertical;
+                  halign: start;
+
+                  Label {
+                    label: "Welcome to the Linux Setup Wizard";
+                    halign: start;
+                    wrap: true;
+
+                    styles [
+                      "title-1"
+                    ]
+                  }
+
+                  Label {
+                    label: "This will install Linux on your computer";
+                    halign: start;
+                    wrap: true;
+                  }
+
+                  Label {
+                    label: "It is recommended that you backup all your files and data before continuing";
+                    halign: start;
+                    wrap: true;
+                    margin-top: 20;
+                  }
+
+                  Label {
+                    label: "Press Next to continue, or close the window to exit Setup";
+                    halign: start;
+                    wrap: true;
+                    margin-top: 20;
+                  }
+
+                  Box {
+                    orientation: vertical;
+                    margin-top: 90;
+
+                    ListBox {
+                      selection-mode: none;
+
+                      styles [
+                        "boxed-list"
+                      ]
+
+                      Adw.SwitchRow {
+                        title: _("Limit RAM usage");
+                        subtitle: _("Installer will be limited to 2GB of RAM. Longer installation, but more stable");
+                      }
+                    }
+
+                    Label {
+                      label: _("If you have a low-memory machine (8GB of RAM or less), YOU MUST ENABLE THIS OPTION");
+                      wrap: true;
+                      margin-top: 10;
+                      halign: start;
+
+                      styles [
+                        "error"
+                      ]
+                    }
+                  }
+                }
+              }
+            };
+          }
+        }
+
+        Adw.NavigationPage page2 {
+          title: _("Location - Setup");
+
+          Adw.ToolbarView {
+            [top]
+            Adw.HeaderBar {}
+
+            [bottom]
+            ActionBar {
+              [end]
+              Button {
+                label: _("Next");
+
+                styles [
+                  "pill",
+                  "suggested-action"
+                ]
+              }
+            }
+
+            content: ScrolledWindow {
+              Adw.Clamp {
+                valign: start;
+                margin-start: 12;
+                margin-end: 12;
+
+                Box {
+                  orientation: vertical;
+                  halign: start;
+
+                  Label {
+                    label: "Select Destination Location";
+                    halign: start;
+                    wrap: true;
+
+                    styles [
+                      "title-1"
+                    ]
+                  }
+
+                  Label {
+                    label: "Where should Linux be installed?";
+                    halign: start;
+                    wrap: true;
+                  }
+
+                  Box {
+                    spacing: 10;
+
+                    Label {
+                      label: "Setup will install Linux into the following drive";
+                      halign: start;
+                      wrap: true;
+                      margin-top: 20;
+                    }
+                  }
+
+                  Label {
+                    label: "To continue, click Next. If you would like to select a different folder, click Browse";
+                    halign: start;
+                    wrap: true;
+                    margin-top: 20;
+                  }
+                }
+              }
+            };
+          }
+        }
+      };
+    };
+  };
+}
